@@ -41,3 +41,15 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 }
+
+apply plugin: 'findbugs'
+tasks.withType(FindBugs) { // https://docs.gradle.org/current/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
+	effort = "max"
+	reportLevel = "high"
+	ignoreFailures = false
+	showProgress = true
+	reports {
+		xml.enabled false
+		html.enabled true
+	}
+}
