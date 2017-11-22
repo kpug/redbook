@@ -6,15 +6,11 @@ buildscript {
 		mavenCentral()
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
-		maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
 	}
 }
-
-
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -24,8 +20,6 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'checkstyle'
 apply plugin: 'maven'
 apply plugin: 'jacoco'
-apply plugin: 'findbugs'
-apply plugin: "com.gorylenko.gradle-git-properties"
 
 group = 'cc.kpug'
 version = '0.0.1-SNAPSHOT'
@@ -50,12 +44,7 @@ dependencies {
 	testCompile('io.projectreactor:reactor-test')
 }
 
-gitProperties {
-	// Change date format in git.properties file.
-	dateFormat = "yyyy-MM-dd HH:mm:ssZ"
-	dateFormatTimeZone = 'GMT'
-}
-
+apply plugin: 'findbugs'
 tasks.withType(FindBugs) { // https://docs.gradle.org/current/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
 	effort = "max"
 	reportLevel = "high"
